@@ -1,12 +1,28 @@
-import { Button } from "./components/ui/button";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { HomeLayout, Landing, Login, Register } from "./pages";
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomeLayout />,
+    children: [
+      {
+        index: true,
+        element: <Landing />,
+      },
+    ],
+  },
+  {
+    path: "login",
+    element: <Login />,
+  },
+  {
+    path: "register",
+    element: <Register />,
+  },
+]);
 function App() {
-  return (
-    <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <Button>click me</Button>
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
