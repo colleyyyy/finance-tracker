@@ -3,8 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Form, redirect } from "react-router-dom";
 import googlePng from "../assets/google.png";
-import { signInUser } from "@/features/supabaseAuth";
+import { signInUser, signInUserWithGoogle } from "@/features/supabaseAuth";
+
 function Login() {
+  // const navigate = useNavigate();
+  async function signin() {
+    await signInUserWithGoogle();
+
+    // navigate("/");
+  }
   return (
     <div className="h-screen flex flex-col items-center justify-center">
       <Form
@@ -19,7 +26,7 @@ function Login() {
             Login
           </Button>
           <Separator className="my-4 h-[3px] bg-slate-400  " />
-          <div className="flex items-center">
+          <div className="flex items-center" onClick={signin}>
             <img src={googlePng} alt="google icon" className="h-4 w-4 ml-2" />
             <Button variant={"secondary"}>Continue with Google</Button>
           </div>

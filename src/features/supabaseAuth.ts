@@ -68,3 +68,23 @@ export async function signInUser(email: string, password: string) {
     return { data: null, error: error.message };
   }
 }
+
+// google sign in
+
+export async function signInUserWithGoogle() {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: import.meta.env.VITE_SUPABASE_GOOGLE,
+
+    options: {
+      queryParams: {
+        access_type: "offline",
+        prompt: "consent",
+      },
+      redirectTo: "http://localhost:5173/",
+    },
+  });
+  if (error) {
+    return { error: error };
+  }
+  return { data };
+}
