@@ -31,3 +31,40 @@ export async function signUpUser(
     return { error: error.message };
   }
 }
+
+export interface SupabaseAuthResponse {
+  data: Data;
+  error: null | string;
+}
+
+export interface Data {
+  user: User;
+}
+export interface User {
+  id: string;
+  aud: string;
+  role: string;
+  email: string;
+  email_confirmed_at: string;
+  phone: string;
+  last_sign_in_at: string;
+  app_metadata?: AppMetadata;
+  user_metadata?: UserMetadata;
+  identities?: Identity[];
+  created_at: string;
+  updated_at: string;
+}
+export async function signInUser(email: string, password: string) {
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    if (error) {
+      return { data: null, error: error.message };
+    }
+    return { data };
+  } catch (error: any) {
+    return { data: null, error: error.message };
+  }
+}
