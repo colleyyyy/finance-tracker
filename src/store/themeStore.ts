@@ -8,9 +8,15 @@ interface ThemeState {
 const useThemeStore = create<ThemeState>((set) => ({
   theme: "dark",
   setTheme: () =>
-    set((state) => ({
-      theme: state.theme === "dark" ? "light" : "dark",
-    })),
+    set((state) => {
+      const root = window.document.documentElement;
+      root.classList.remove("light", "dark");
+
+      const newTheme = state.theme === "dark" ? "light" : "dark";
+      root.classList.add(newTheme);
+
+      return { theme: newTheme };
+    }),
 }));
 
 export default useThemeStore;
