@@ -57,3 +57,6 @@
     @apply bg-background text-foreground;
   }
 }
+.padding {
+  @apply px-8 py-6 max-w-[80vw] mx-auto;
+}
