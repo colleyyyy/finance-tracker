@@ -3,6 +3,7 @@ import { create } from "zustand";
 interface ThemeState {
   theme: string;
   setTheme: () => void;
+  initTheme: () => void;
 }
 
 const useThemeStore = create<ThemeState>((set) => ({
@@ -16,6 +17,15 @@ const useThemeStore = create<ThemeState>((set) => ({
       root.classList.add(newTheme);
 
       return { theme: newTheme };
+    }),
+  initTheme: () =>
+    set(() => {
+      const root = window.document.documentElement;
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      root.classList.remove("light", "dark");
+      root.classList.add(savedTheme);
+
+      return { theme: savedTheme };
     }),
 }));
 

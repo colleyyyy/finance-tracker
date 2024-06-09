@@ -28,7 +28,7 @@ function TransactionCard({ title, icons, value }: Props) {
         {icons === "move-up-right" && (
           <p className="text-destructive">-${value}</p>
         )}{" "}
-        {icons === "bar-chart-4" && <p className="text-black">${value}</p>}
+        {icons === "bar-chart-4" && <p className="text-green-700">${value}</p>}
         <p className="font-light text-sm ">in 24 transaction</p>
       </div>
     </article>
