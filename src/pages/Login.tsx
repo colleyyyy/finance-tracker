@@ -4,6 +4,7 @@ import { Separator } from "@/components/ui/separator";
 import { Form, redirect } from "react-router-dom";
 import googlePng from "../assets/google.png";
 import { signInUser, signInUserWithGoogle } from "@/features/supabaseAuth";
+import useUserStore from "@/store/userStore";
 
 function Login() {
   // const navigate = useNavigate();
@@ -39,12 +40,13 @@ export async function action({ request }: { request: Request }) {
   const formData = await request.formData();
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
+
   try {
     const res = await signInUser(email, password);
     if (res.error) {
       return { error: res.error };
     }
-    return redirect("/");
+    return redirect("/dashboard");
   } catch (error: any) {
     return { error: error.message };
   }

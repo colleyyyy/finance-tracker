@@ -5,7 +5,7 @@ import useThemeStore from "@/store/themeStore";
 function Navbar() {
   const setTheme = useThemeStore((state) => state.setTheme);
   return (
-    <header className="padding flex justify-between">
+    <header className="padding flex justify-between w-full">
       <h1 className="text-xl font-bold">
         Finance <span className="text-primary capitalize">tracker</span>
       </h1>

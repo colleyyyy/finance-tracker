@@ -88,3 +88,13 @@ export async function signInUserWithGoogle() {
   }
   return { data };
 }
+
+export async function getCurrentUser() {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (user === null || user === undefined) {
+    return { error: "not found" };
+  }
+  return { user };
+}

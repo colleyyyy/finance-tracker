@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 
 function Footer() {
   return (
-    <div className="flex  items-center justify-between padding">
+    <footer className="flex  items-center justify-between padding w-full self-end ">
       <p>&reg; {new Date().getFullYear()} Untitled UI. All right reserved.</p>
       <ul>
         <Button asChild variant={"link"}>
@@ -16,7 +16,7 @@ function Footer() {
           <NavLink to={""}>cookies</NavLink>
         </Button>
       </ul>
-    </div>
+    </footer>
   );
 }
 export default Footer;

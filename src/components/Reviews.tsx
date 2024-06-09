@@ -6,7 +6,7 @@ function Reviews() {
       <h2 className="text-4xl mb-4 font-bold text-center">
         Hear what they said
       </h2>
-      <section className="grid grid-cols-2 gap-y-12">
+      <section className="grid grid-cols-2 gap-y-12 place-items-center">
         <article className="border-solid border-2 px-4 py-6 max-w-[25rem] rounded-md">
           <div className="flex mb-2 gap-x-4 capitalize">
             <img
