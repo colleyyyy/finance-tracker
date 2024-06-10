@@ -1,10 +1,18 @@
-import { TopHeader, Footer, TransactionSummary } from "@/components";
+import {
+  TopHeader,
+  Footer,
+  TransactionSummary,
+  Modal,
+  AddTransaction,
+} from "@/components";
 import { Separator } from "@/components/ui/separator";
 import { getCurrentUser } from "@/features/supabaseAuth";
 import useUserStore from "@/store/userStore";
-import { Outlet, useLoaderData } from "react-router-dom";
+import { useState } from "react";
+import { useLoaderData } from "react-router-dom";
 
 function Dashboard() {
+  const [showModal, setShowModal] = useState(false);
   const setUserName = useUserStore((state) => state.setUserName);
   const userName = useUserStore((state) => state.name);
 
@@ -14,9 +22,14 @@ function Dashboard() {
 
   return (
     <div className="grid grid-rows-[5rem_auto_1fr_5rem] h-screen">
-      <TopHeader userName={userName} />
+      <TopHeader userName={userName} setShowModal={setShowModal} />
       <Separator className="h-1 max-w-[85vw] mx-auto" />
       <TransactionSummary />
+      {showModal && (
+        <Modal>
+          <AddTransaction setShowModal={setShowModal} />
+        </Modal>
+      )}
       <Footer />
     </div>
   );

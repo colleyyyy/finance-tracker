@@ -2,8 +2,9 @@ import { Button } from "./ui/button";
 
 interface Props {
   userName?: string;
+  setShowModal: (v: boolean) => void;
 }
-function TopHeader({ userName }: Props) {
+function TopHeader({ userName, setShowModal }: Props) {
   return (
     <>
       <header className="padding flex items-center justify-between w-full">
@@ -17,7 +18,14 @@ function TopHeader({ userName }: Props) {
           </ul>
         </div>
         <ul className="flex items-center gap-x-4">
-          <Button size={"sm"}>Add Transaction</Button>
+          <Button
+            size={"sm"}
+            onClick={() => {
+              setShowModal(true);
+            }}
+          >
+            Add Transaction
+          </Button>
           <p className="capitalize">
             hello,<span className="font-semibold"> {userName}</span>
           </p>

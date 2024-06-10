@@ -5,3 +5,5 @@ export { default as Footer } from "./Footer";
 export { default as TopHeader } from "./TopHeader";
 export { default as TransactionSummary } from "./TransactionSummary";
 export { default as TransactionCard } from "./TransactionCard";
+export { default as Modal } from "./Modal";
+export { default as AddTransaction } from "./AddTransaction";
