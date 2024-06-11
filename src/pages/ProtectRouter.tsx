@@ -1,12 +1,19 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import useUserStore from "@/store/userStore";
-import { redirect } from "react-router-dom";
 
 function ProtectRouter({ children }: { children: React.ReactNode }) {
   const user = useUserStore((state) => state.user);
   const auth = user?.role;
-  if (auth !== "authenticated") {
-    redirect("/login");
-  }
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (auth !== "authenticated") {
+      navigate("/login");
+    }
+  }, [auth, navigate]);
+
   return <>{children}</>;
 }
+
 export default ProtectRouter;

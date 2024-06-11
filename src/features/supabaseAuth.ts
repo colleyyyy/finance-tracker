@@ -90,11 +90,14 @@ export async function signInUserWithGoogle() {
 }
 
 export async function getCurrentUser() {
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (user === null || user === undefined) {
+  const data2 = await supabase.auth.getSession();
+  if (data2 === null || data2 === undefined) {
     return { error: "not found" };
   }
+
+  const user = {
+    ...data2?.data?.session?.user?.user_metadata,
+    role: data2?.data?.session?.user?.role,
+  };
   return { user };
 }

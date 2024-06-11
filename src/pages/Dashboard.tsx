@@ -8,23 +8,28 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { getCurrentUser } from "@/features/supabaseAuth";
 import useUserStore from "@/store/userStore";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 
 function Dashboard() {
   const [showModal, setShowModal] = useState(false);
+
   const setUserName = useUserStore((state) => state.setUserName);
   const userName = useUserStore((state) => state.user?.name);
   const setUserProfile = useUserStore((state) => state.setUserProfile);
-  const { user } = useLoaderData();
+  const { user: user2 } = useLoaderData();
 
-  setUserName(user.user_metadata.first_name);
-  const obj = {
-    name: user?.user_metadata?.first_name || "undefined",
-    id: user?.id,
-    role: user?.role,
-  };
-  setUserProfile(obj);
+  useEffect(() => {
+    if (user2) {
+      setUserName(user2.first_name);
+      const obj = {
+        name: user2?.first_name || "undefined",
+        id: user2?.sub,
+        role: user2?.role,
+      };
+      setUserProfile(obj);
+    }
+  }, [user2, setUserName, setUserProfile]);
 
   return (
     <div className="grid grid-rows-[5rem_auto_1fr_5rem] h-screen">
@@ -48,4 +53,5 @@ export async function loader() {
 
   return { user };
 }
+
 export default Dashboard;
