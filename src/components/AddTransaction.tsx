@@ -1,20 +1,37 @@
+import useUserStore from "@/store/userStore";
 import FormRow from "./FormRow";
 import { Button } from "./ui/button";
 import { X } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { addTransaction as add } from "../features/supabaseDb";
+import supabase from "@/database/supabase";
 function AddTransaction({
   setShowModal,
 }: {
   setShowModal: (v: boolean) => void;
 }) {
+  const user = useUserStore((state) => state.user);
   const ref = useRef<HTMLDivElement>(null);
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const formData = new FormData(form);
     const formObject = Object.fromEntries(formData);
+    const { id } = user;
 
     console.log(formObject);
+    const obj = {
+      id,
+      transactionType: formObject.type,
+      transactionValue: formObject.value,
+      category: formObject.category,
+    };
+    const auth_user = await supabase.auth.getUser();
+    if (!auth_user) {
+      console.error("user not authenticated");
+      return { error: "user not authenticated" };
+    }
+    await add(obj);
     form.reset();
   };
   const handleClickOutside = (event: MouseEvent) => {

@@ -14,11 +14,17 @@ import { useLoaderData } from "react-router-dom";
 function Dashboard() {
   const [showModal, setShowModal] = useState(false);
   const setUserName = useUserStore((state) => state.setUserName);
-  const userName = useUserStore((state) => state.name);
-
+  const userName = useUserStore((state) => state.user?.name);
+  const setUserProfile = useUserStore((state) => state.setUserProfile);
   const { user } = useLoaderData();
 
   setUserName(user.user_metadata.first_name);
+  const obj = {
+    name: user?.user_metadata?.first_name || "undefined",
+    id: user?.id,
+    role: user?.role,
+  };
+  setUserProfile(obj);
 
   return (
     <div className="grid grid-rows-[5rem_auto_1fr_5rem] h-screen">

@@ -1,5 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { HomeLayout, Dashboard, Landing, Login, Register } from "./pages";
+import {
+  HomeLayout,
+  Dashboard,
+  Landing,
+  Login,
+  Register,
+  ProtectRouter,
+} from "./pages";
 import { action as registerAction } from "./pages/Register";
 import { action as loginAction } from "./pages/Login";
 import { loader as dashboardLoader } from "./pages/Dashboard";
@@ -28,7 +35,11 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <Dashboard />,
+    element: (
+      <ProtectRouter>
+        <Dashboard />
+      </ProtectRouter>
+    ),
     loader: dashboardLoader,
   },
 ]);
