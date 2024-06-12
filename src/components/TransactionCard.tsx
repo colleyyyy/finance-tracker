@@ -5,8 +5,9 @@ interface Props {
   title: string;
   icons?: string;
   value: number;
+  numTransaction?: string;
 }
-function TransactionCard({ title, icons, value }: Props) {
+function TransactionCard({ title, icons, value, numTransaction }: Props) {
   let displayIcons =
     icons === "move-down-left" ? <MoveDownLeft /> : <MoveUpRight />;
 
@@ -29,7 +30,7 @@ function TransactionCard({ title, icons, value }: Props) {
           <p className="text-destructive">-${value}</p>
         )}
         {icons === "bar-chart-4" && <p className="text-green-700">${value}</p>}
-        <p className="font-light text-sm ">in 24 transaction</p>
+        <p className="font-light text-sm ">in {numTransaction} transactions</p>
       </div>
     </article>
   );

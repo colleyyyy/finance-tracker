@@ -5,11 +5,7 @@ import { X } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { addTransaction as add } from "../features/supabaseDb";
 import supabase from "@/database/supabase";
-function AddTransaction({
-  setShowModal,
-}: {
-  setShowModal: (v: boolean) => void;
-}) {
+function Transaction({ setShowModal }: { setShowModal: (v: boolean) => void }) {
   const user = useUserStore((state) => state.user);
   const ref = useRef<HTMLDivElement>(null);
   const handleSubmit = async (event: React.SyntheticEvent) => {
@@ -18,8 +14,6 @@ function AddTransaction({
     const formData = new FormData(form);
     const formObject = Object.fromEntries(formData);
     const { id } = user;
-
-    console.log(formObject);
     const obj = {
       id,
       transactionType: formObject.type,
@@ -70,6 +64,7 @@ function AddTransaction({
           <option value="healthcare">healthcare</option>
           <option value="transportation">transportation</option>
           <option value="wage">wage</option>
+          <option value="other">other</option>
         </select>
         <Button type="submit">Add</Button>
       </form>
@@ -77,4 +72,4 @@ function AddTransaction({
   );
 }
 
-export default AddTransaction;
+export default Transaction;

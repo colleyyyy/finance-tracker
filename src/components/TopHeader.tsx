@@ -12,7 +12,7 @@ function TopHeader({ userName, setShowModal }: Props) {
           <h1 className="text-4xl font-semibold">
             Finance <span className="text-primary"> Tracker</span>
           </h1>
-          <ul className="">
+          <ul className="space-x-4">
             <Button variant={"secondary"}>Summary</Button>
             <Button variant={"secondary"}>Transaction</Button>
           </ul>

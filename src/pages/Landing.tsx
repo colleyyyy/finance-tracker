@@ -4,7 +4,7 @@ import { Check } from "lucide-react";
 function Landing() {
   return (
     <>
-      <section className="grid grid-cols-2 mt-10">
+      <section className="grid grid-cols-2 mt-10 lg:gap-x-4">
         {/* rightside text */}
         <section className="place-self-center">
           <h2 className="text-3xl mb-4 font-bold">
@@ -33,7 +33,7 @@ function Landing() {
 
         {/* picture */}
         <aside>
-          <img src={jar} alt="money jar" className="rounded-lg opacity-85" />
+          <img src={jar} alt="money jar" className="rounded-lg opacity-85 lg:h-[45rem] lg:w-[45rem]" />
         </aside>
       </section>
       <Reviews />
