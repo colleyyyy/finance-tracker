@@ -5,6 +5,7 @@ import {
   Modal,
   Transaction,
 } from "@/components";
+import TransactionsContainer from "@/components/TransactionsContainer";
 import { Separator } from "@/components/ui/separator";
 import { getCurrentUser } from "@/features/supabaseAuth";
 import { getAllTransactions } from "@/features/supabaseDb";
@@ -35,7 +36,6 @@ function Dashboard() {
     async function getAll() {
       const transactions = await getAllTransactions(user2.sub);
       if (transactions) {
-        console.log("Fetched transactions:", transactions);
         setTransactionData(transactions);
       } else {
         console.log("No transactions found.");
@@ -47,17 +47,20 @@ function Dashboard() {
     }
   }, [user2, showModal]);
   return (
-    <div className="grid grid-rows-[5rem_auto_1fr_5rem] h-screen">
+    <div className="grid grid-rows-[5rem_auto_auto_1fr_5rem] h-screen">
       <TopHeader userName={userName} setShowModal={setShowModal} />
       <Separator className="h-1 max-w-[85vw] mx-auto" />
       {transactionData.length > 0 && (
         <TransactionSummary transactionData={transactionData} />
       )}
+      {transactionData.length > 0 && (
+        <TransactionsContainer transactionData={transactionData} />
+      )}
       {showModal && (
         <Modal>
           <Transaction setShowModal={setShowModal} />
         </Modal>
-      )}
+      )}{" "}
       <Footer />
     </div>
   );

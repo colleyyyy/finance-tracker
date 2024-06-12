@@ -41,7 +41,6 @@ export async function getAllTransactions(id: string) {
       throw error;
     }
 
-    console.log("Transactions:", data);
     return data;
   } catch (error) {
     console.error("Error fetching transactions:", error);
