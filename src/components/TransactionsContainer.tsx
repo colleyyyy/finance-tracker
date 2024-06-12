@@ -25,7 +25,7 @@ function TransactionsContainer({
   transactionData: TransactionSummaryProps;
 }) {
   return (
-    <Table className="padding mt-12">
+    <Table className="padding mt-12 capitalize">
       <TableCaption className="font-semibold text-secondary">
         A list of your recent transactions.
       </TableCaption>
